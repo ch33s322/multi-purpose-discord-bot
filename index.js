@@ -1,11 +1,12 @@
-//dakotas shitty discord bot lmao
+//dakotas shity discord bot lmao
 
-const Discord = require("discord.js");
-const YTDL = require("YTDL-core");
+const Discord = require("discord.js"); //library for interacting with discord
+const YTDL = require("YTDL-core");      //library for interacting with yt and playing music in vc
+const fs = require("fs");       //library for file system in node js
 
-const TOKEN = "no token 4 u";
+const TOKEN = "no token 4 u"; //not gonna let you steal bot
 
-const PREFIX = "!";
+const PREFIX = "!"; //list of prefixes that get the bot's attention
 const DADFIX = "I'm";
 const GN = "Goodnight";
 const GM = "Good morning";
@@ -27,6 +28,7 @@ function play(connection, message) {
 
     )
 };
+//all fortunes for the 8ball command
 var fortunes = [
     "yes",
     "maybe",
@@ -39,6 +41,7 @@ var fortunes = [
     "naw",
     "GeT oUt Of My RoOm I'm PlAyInG mInEcRaFt!!!!111!!!!"
 ]
+//d 20 command
 var d20 = [
     "1",
     "2",
@@ -61,6 +64,7 @@ var d20 = [
     "19",
     "20"
 ]
+//random descriptions for profile command
 var descriptors = [
     "Certified hottie",
     "Might just be the thiccest one here",
@@ -86,15 +90,15 @@ var descriptors = [
     "I would be lying if i told you they had a personality",
     "lonely boi"
 ]
-
+//on sartup let me know that the bot is online
 Bot.on("ready", function() {
     console.log("ready");
 });
 
 Bot.on("message", function(message) {
-    if (message.author.equals(Bot.user)) return;
+    if (message.author.equals(Bot.user)) return;//dont let bots msg bots
 
-    if (!message.content.startsWith(PREFIX)) return;
+    if (!message.content.startsWith(PREFIX)) return;//ignore if not start with prefix
 
     var args = message.content.substring(PREFIX.length).split(" ");
 
@@ -114,7 +118,8 @@ Bot.on("message", function(message) {
             message.channel.sendEmbed(embed);
             break;
 
-        case "profile":
+        case "profile": 
+            //either get specific user or assign a random profile
             switch (message.author.id) {
                 case 364133127238582273: //ch33s3
                     var prof = new Discord.RichEmbed()
@@ -145,6 +150,7 @@ Bot.on("message", function(message) {
                         .setThumbnail(message.author.avatarURL)
                     message.channel.sendEmbed(prof);
                     break;
+                 //random case if not recignised
                 default:
                     var prof = new Discord.RichEmbed()
                         .addField(message.author.username.toString(), (descriptors[Math.floor(Math.random() * descriptors.length)]))
@@ -175,16 +181,19 @@ Bot.on("message", function(message) {
             });
 
             break;
+            //doesnt work needs fixing
         case "skip":
             var server = servers[message.guild.id];
             if (server.dispacher) server.dispacher.end();
             break;
+            //doesnt work needs fixing
         case "stop":
             var server = servers[message.guild.id];
             if (message.guild.voiceConnection) {
                 message.guild.voiceConnection.disconnect;
             }
             break;
+            //start dice region
         case "d20":
             if (args[1]) {
                 for (x = 0; x < args[1]; x++) {
@@ -255,7 +264,7 @@ Bot.on("message", function(message) {
                 message.channel.sendMessage("total: " + total.toString());
             }
             break;
-
+        //end dice region
         default:
             message.channel.sendMessage("Invalid comand");
 
@@ -263,7 +272,7 @@ Bot.on("message", function(message) {
 
     }
 });
-
+//dad joke function
 Bot.on("message", function(message) {
     if (message.author.equals(Bot.user)) return;
 
@@ -276,6 +285,7 @@ Bot.on("message", function(message) {
         break;
     }
 });
+//goodnight function
 Bot.on("message", function(message) {
     if (message.author.equals(Bot.user)) return;
 
@@ -288,6 +298,7 @@ Bot.on("message", function(message) {
         break;
     }
 });
+//goodmorning function
 Bot.on("message", function(message) {
     if (message.author.equals(Bot.user)) return;
 
@@ -305,9 +316,9 @@ Bot.on("message", function(message) {
 
 
 
-
+//log everyonesmessages, ID and, name in console so i can add them to the profile list
 Bot.on("message", function(message) {
     console.log(message.content + " " + message.author.id + " " + message.author.username);
 });
 
-Bot.login(TOKEN);
+Bot.login(TOKEN); //login (makes the bot actually come online)
