@@ -3,7 +3,7 @@
 const Discord = require("discord.js");
 const YTDL = require("YTDL-core");
 
-const TOKEN = "NTQ2MTUxMTgxMDU2MDgxOTIw.D0xysQ.3iAuaEPL93phV-QgpHwBwLh4DHw";
+const TOKEN = "no token 4 u";
 
 const PREFIX = "!";
 const DADFIX = "I'm";
